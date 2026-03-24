@@ -4,12 +4,12 @@ import { z } from 'astro/zod';
 
 const welcome = defineCollection({
 	loader: glob({ base: './src/content/welcome', pattern: '**/*.{md,mdx}' }),
-	schema: ({ image }) =>
+	schema: () =>
 		z.object({
 			title: z.string(),
 			slogan: z.string(),
 			description: z.string(),
-			image: z.optional(image()),
+			image: z.string().optional(),
 		}),
 });
 
@@ -24,21 +24,21 @@ const statistics = defineCollection({
 
 const recruitmentProcess = defineCollection({
 	loader: glob({ base: './src/content/recruitmentProcess', pattern: '**/*.{md,mdx}' }),
-	schema: ({ image }) =>
+	schema: () =>
 		z.object({
 			title: z.string(),
 			description: z.string(),
-			image: z.optional(image()),
+			image: z.string().optional(),
 		}),
 });
 
 const automation = defineCollection({
 	loader: glob({ base: './src/content/automation', pattern: '**/*.{md,mdx}' }),
-	schema: ({ image }) =>
+	schema: () =>
 		z.object({
 			title: z.string(),
 			description: z.string(),
-			image: z.optional(image()),
+			image: z.string().optional(),
 		}),
 });
 

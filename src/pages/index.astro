@@ -20,128 +20,28 @@ const heroDescription =
   welcomeData?.description ??
   "Automate hiring, access pre-qualified candidates, and grow your team - without an internal HR.";
 const heroImage =
-  welcomeData?.image?.src ??
+  welcomeData?.image ??
   "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=800&fit=crop";
 
-const stats =
-  statisticsEntries.length > 0
-    ? statisticsEntries
-        .sort((a, b) => a.id.localeCompare(b.id))
-        .map((item) => item.data)
-    : [
-        { value: "+50%", title: "Better matches, pre-qualified candidates" },
-        { value: "70%", title: "Of recruitment tasks are automated" },
-        { value: "85%", title: "Recruitment costs reduction" },
-      ];
+const stats = statisticsEntries
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .map((item) => item.data);
 
-const recruitmentItems =
-  recruitmentEntries.length > 0
-    ? recruitmentEntries
-        .sort((a, b) => a.id.localeCompare(b.id))
-        .map((item) => item.data)
-    : [
-        {
-          title: "Save Time",
-          description:
-            "Automation reduces time spent on repetitive tasks, allowing you to focus on what matters.",
-          image:
-            "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=200&h=200&fit=crop",
-        },
-        {
-          title: "Reduce Costs",
-          description:
-            "Eliminating the need for a HR department dedicated to in-house staff.",
-          image:
-            "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=200&h=200&fit=crop",
-        },
-        {
-          title: "Flexible & Customizable",
-          description:
-            "Process customization depending on the specifics of each business.",
-          image:
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop",
-        },
-        {
-          title: "Dedicated HR Expertise",
-          description:
-            "Receive recommendations and real support from your personal HR consultant.",
-          image:
-            "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200&h=200&fit=crop",
-        },
-      ];
+const recruitmentItems = recruitmentEntries
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .map((item) => item.data);
 
-const automationItems =
-  automationEntries.length > 0
-    ? automationEntries
-        .sort((a, b) => a.id.localeCompare(b.id))
-        .map((item) => item.data)
-    : [
-        {
-          title: "One tool - the entire process, simple and efficient",
-          description:
-            "Automate the recruitment process - from candidate generation, intelligent screening and up to interview scheduling - in one comprehensive platform.",
-          image:
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=800&fit=crop",
-        },
-        {
-          title: "Subscription model",
-          description:
-            "For a fixed subscription, the Concierge service offers you pre-qualified, motivated, and interview-ready candidates.",
-        },
-        {
-          title: "Smart plus human",
-          description:
-            "We combine process automation, artificial intelligence and human support in a full HR-as-a-Service type service, specially designed for SMEs that want to hire efficiently.",
-        },
-      ];
+const automationItems = automationEntries
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .map((item) => item.data);
 
-const choosingItems =
-  choosingEntries.length > 0
-    ? choosingEntries
-        .sort((a, b) => a.id.localeCompare(b.id))
-        .map((item) => item.data)
-    : [
-        {
-          title: "AI-Powered Screening",
-          description:
-            "Intelligent algorithms match candidates to your requirements automatically.",
-        },
-        {
-          title: "Pre-Qualified Candidates",
-          description:
-            "Access a pool of vetted candidates ready for your specific roles.",
-        },
-        {
-          title: "Dedicated Support",
-          description:
-            "Personal HR consultant to guide you through the process.",
-        },
-        {
-          title: "Cost Effective",
-          description:
-            "Fixed subscription model with no hidden fees or surprises.",
-        },
-      ];
+const choosingItems = choosingEntries
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .map((item) => item.data);
 
-const feedbackItems =
-  feedbackEntries.length > 0
-    ? feedbackEntries
-        .sort((a, b) => a.id.localeCompare(b.id))
-        .map((item) => item.data)
-    : [
-        {
-          name: "Pearl Code",
-          tagline: "@Mila",
-          description:
-            "I want to thank the Rocman team for support in the recruitment process. Minimum resources and maximum results, highly recommend!",
-        },
-        {
-          name: "Zevet One SRL",
-          tagline: "@Dan",
-          description:
-            "Their professionalism and efficiency were essential for our recruitment success.",
-        },
-      ];
+const feedbackItems = feedbackEntries
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .map((item) => item.data);
 
 const automationHeading = automationItems[0]?.title ?? "Automation";
 const automationParagraphs = automationItems.map((item) => item.description);
@@ -200,7 +100,7 @@ const automationImage =
                 <article class="feature-card">
                   <div class="feature-image-wrap">
                     <img
-                      src={item.image?.src ?? item.image}
+                      src={item.image}
                       alt={item.title}
                       class="feature-image"
                       loading="lazy"
@@ -226,7 +126,7 @@ const automationImage =
           </div>
           <div class="hero-media">
             <img
-              src={automationImage?.src ?? automationImage}
+              src={automationImage}
               alt="Analytics Dashboard"
               loading="lazy"
             />
