@@ -2,8 +2,8 @@ backend:
   name: "git-gateway" # The backend to use for authentication and storing data
   branch: "main" # The branch on which to commit changes
 
-media_folder: "src/assets/images" # Location where files will be stored in the repo
-public_folder: "../../assets/images" # Saved path in markdown frontmatter
+media_folder: "public/assets/images" # Location where files will be stored in the repo
+public_folder: "/assets/images" # Saved path in markdown frontmatter
 
 
 collections:

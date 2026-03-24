@@ -5,6 +5,30 @@ import Header from "../components/Header.astro";
 import { getCollection } from "astro:content";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
+const normalizeImageSrc = (src?: string) => {
+  if (!src) {
+    return undefined;
+  }
+
+  if (
+    src.startsWith("http://") ||
+    src.startsWith("https://") ||
+    src.startsWith("/")
+  ) {
+    return src;
+  }
+
+  if (src.startsWith("../../assets/images/")) {
+    return src.replace("../../assets/images/", "/assets/images/");
+  }
+
+  if (src.startsWith("assets/images/")) {
+    return `/${src}`;
+  }
+
+  return src;
+};
+
 const welcomeEntries = await getCollection("welcome");
 const statisticsEntries = await getCollection("statistics");
 const recruitmentEntries = await getCollection("recruitmentProcess");
@@ -23,7 +47,7 @@ const heroDescription =
   welcomeData?.description ??
   "Automate hiring, access pre-qualified candidates, and grow your team - without an internal HR.";
 const heroImage =
-  welcomeData?.image ??
+  normalizeImageSrc(welcomeData?.image) ??
   "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=800&fit=crop";
 
 const stats = statisticsEntries
@@ -61,7 +85,7 @@ const teamItems = teamEntries
 const automationHeading = automationItems[0]?.title ?? "Automation";
 const automationParagraphs = automationItems.map((item) => item.description);
 const automationImage =
-  automationItems.find((item) => item.image)?.image ??
+  normalizeImageSrc(automationItems.find((item) => item.image)?.image) ??
   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=800&fit=crop";
 ---
 
@@ -115,7 +139,7 @@ const automationImage =
                 <article class="feature-card">
                   <div class="feature-image-wrap">
                     <img
-                      src={item.image}
+                      src={normalizeImageSrc(item.image)}
                       alt={item.title}
                       class="feature-image"
                       loading="lazy"
@@ -220,7 +244,7 @@ const automationImage =
                   <div class="blog-image-wrap">
                     {item.image && (
                       <img
-                        src={item.image}
+                        src={normalizeImageSrc(item.image)}
                         alt={item.title}
                         class="blog-image"
                         loading="lazy"
@@ -255,7 +279,7 @@ const automationImage =
                 <article class="team-card">
                   {item.image && (
                     <img
-                      src={item.image}
+                      src={normalizeImageSrc(item.image)}
                       alt={item.name}
                       class="team-avatar"
                       loading="lazy"
