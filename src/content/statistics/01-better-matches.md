@@ -1,4 +1,4 @@
 ---
-title: "Better matches, pre-qualified candidates"
-value: "+50%"
+title: Better matches, pre-qualified candidates
+value: +60%
 ---
