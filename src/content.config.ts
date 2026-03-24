@@ -2,21 +2,6 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const blog = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
-	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			// Transform string to Date object
-			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			heroImage: z.optional(image()),
-		}),
-});
-
 const welcome = defineCollection({
 	loader: glob({ base: './src/content/welcome', pattern: '**/*.{md,mdx}' }),
 	schema: ({ image }) =>
@@ -28,4 +13,59 @@ const welcome = defineCollection({
 		}),
 });
 
-export const collections = { blog, welcome };
+const statistics = defineCollection({
+	loader: glob({ base: './src/content/statistics', pattern: '**/*.{md,mdx}' }),
+	schema: () =>
+		z.object({
+			title: z.string(),
+			value: z.string(),
+		}),
+});
+
+const recruitmentProcess = defineCollection({
+	loader: glob({ base: './src/content/recruitmentProcess', pattern: '**/*.{md,mdx}' }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+			image: z.optional(image()),
+		}),
+});
+
+const automation = defineCollection({
+	loader: glob({ base: './src/content/automation', pattern: '**/*.{md,mdx}' }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+			image: z.optional(image()),
+		}),
+});
+
+const choosingRocman = defineCollection({
+	loader: glob({ base: './src/content/choosingRocman', pattern: '**/*.{md,mdx}' }),
+	schema: () =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+		}),
+});
+
+const feedback = defineCollection({
+	loader: glob({ base: './src/content/feedback', pattern: '**/*.{md,mdx}' }),
+	schema: () =>
+		z.object({
+			name: z.string(),
+			tagline: z.string(),
+			description: z.string(),
+		}),
+});
+
+export const collections = {
+	welcome,
+	statistics,
+	recruitmentProcess,
+	automation,
+	choosingRocman,
+	feedback,
+};

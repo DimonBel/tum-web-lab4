@@ -7,18 +7,6 @@ public_folder: "../../assets/images" # Saved path in markdown frontmatter
 
 
 collections:
-  - name: "blog" # Used in routes, e.g., /admin/collections/blog
-    label: "Blog" # Used in the UI
-    folder: "src/content/blog" # The path to the folder where the documents are stored
-    create: true # Allow users to create new documents in this collection
-    fields: # The fields for each document, usually in frontmatter
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "string" }
-      - { label: "Publish Date", name: "pubDate", widget: "datetime" }
-      - { label: "Updated Date", name: "updatedDate", widget: "datetime", required: false }
-      - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
-
   - name: "welcomeMessage"
     label: "Welcome Message"
     description: "Welcome message for the application"
