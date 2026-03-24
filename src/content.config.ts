@@ -61,6 +61,15 @@ const feedback = defineCollection({
 		}),
 });
 
+const data = defineCollection({
+	loader: glob({ base: './src/content/data', pattern: '**/*.{md,mdx}' }),
+	schema: () =>
+		z.object({
+			number: z.string(),
+			description: z.string(),
+		}),
+});
+
 export const collections = {
 	welcome,
 	statistics,
@@ -68,4 +77,5 @@ export const collections = {
 	automation,
 	choosingRocman,
 	feedback,
+	data,
 };

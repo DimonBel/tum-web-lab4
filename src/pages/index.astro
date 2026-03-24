@@ -11,6 +11,7 @@ const recruitmentEntries = await getCollection("recruitmentProcess");
 const automationEntries = await getCollection("automation");
 const choosingEntries = await getCollection("choosingRocman");
 const feedbackEntries = await getCollection("feedback");
+const dataEntries = await getCollection("data");
 
 const welcomeData = welcomeEntries[0]?.data;
 
@@ -40,6 +41,10 @@ const choosingItems = choosingEntries
   .map((item) => item.data);
 
 const feedbackItems = feedbackEntries
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .map((item) => item.data);
+
+const dataItems = dataEntries
   .sort((a, b) => a.id.localeCompare(b.id))
   .map((item) => item.data);
 
@@ -176,6 +181,22 @@ const automationImage =
         </div>
       </section>
 
+      <section
+        class="company-data-strip"
+        aria-label="Company collaboration data"
+      >
+        <div class="container company-data-grid">
+          {
+            dataItems.map((item) => (
+              <article class="company-data-card">
+                <div class="company-data-number">{item.number}</div>
+                <div class="company-data-description">{item.description}</div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
       <section id="contact" class="content-section white">
         <div class="container">
           <div class="section-head">
@@ -288,10 +309,44 @@ const automationImage =
     background: #6366f1;
   }
 
+  .company-data-strip {
+    padding: 3.5rem 0;
+    background: #4f46e5;
+  }
+
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 2rem;
+  }
+
+  .company-data-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .company-data-card {
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 2rem;
+    text-align: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .company-data-number {
+    margin-bottom: 0.5rem;
+    color: #fff;
+    font-size: clamp(2.1rem, 4vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .company-data-description {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.03rem;
+    line-height: 1.45;
   }
 
   .stat-item {
@@ -541,7 +596,8 @@ const automationImage =
     .split-grid,
     .cards-grid.four-up,
     .cards-grid.two-up,
-    .stats-grid {
+    .stats-grid,
+    .company-data-grid {
       grid-template-columns: 1fr;
     }
 
