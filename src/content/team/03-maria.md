@@ -1,5 +1,5 @@
 ---
-name: "Maria"
-role: "Customer Success"
-image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop"
+name: Maria
+role: Customer Success
+image: https://images.pexels.com/photos/948873/pexels-photo-948873.jpeg?cs=srgb&dl=pexels-olly-948873.jpg&fm=jpg
 ---
