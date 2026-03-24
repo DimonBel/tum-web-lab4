@@ -12,6 +12,7 @@ const automationEntries = await getCollection("automation");
 const choosingEntries = await getCollection("choosingRocman");
 const feedbackEntries = await getCollection("feedback");
 const dataEntries = await getCollection("data");
+const blogEntries = await getCollection("blog");
 
 const welcomeData = welcomeEntries[0]?.data;
 
@@ -45,6 +46,10 @@ const feedbackItems = feedbackEntries
   .map((item) => item.data);
 
 const dataItems = dataEntries
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .map((item) => item.data);
+
+const blogItems = blogEntries
   .sort((a, b) => a.id.localeCompare(b.id))
   .map((item) => item.data);
 
@@ -194,6 +199,38 @@ const automationImage =
               </article>
             ))
           }
+        </div>
+      </section>
+
+      <section id="blog" class="content-section white">
+        <div class="container">
+          <div class="section-head">
+            <h2>Blog & Resources</h2>
+            <p>Expert insights on recruitment and HR</p>
+          </div>
+          <div class="cards-grid three-up">
+            {
+              blogItems.map((item) => (
+                <article class="blog-card">
+                  <div class="blog-image-wrap">
+                    {item.image && (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        class="blog-image"
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <a href="#" class="blog-read-more">
+                    Read More -&gt;
+                  </a>
+                </article>
+              ))
+            }
+          </div>
         </div>
       </section>
 
@@ -395,6 +432,10 @@ const automationImage =
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .cards-grid.three-up {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .feature-card,
   .benefit-card,
   .testimonial-card {
@@ -477,6 +518,59 @@ const automationImage =
 
   .testimonial-card {
     padding: 2rem;
+  }
+
+  .blog-card {
+    border-radius: 1rem;
+    border: 1px solid #e0e7ff;
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .blog-image-wrap {
+    margin-bottom: 1rem;
+    min-height: 5rem;
+  }
+
+  .blog-image {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 0.75rem;
+    object-fit: cover;
+  }
+
+  .blog-card h3 {
+    margin: 0 0 0.8rem;
+    color: #1e1b4b;
+    font-size: 1.3rem;
+    line-height: 1.35;
+  }
+
+  .blog-card p {
+    margin: 0 0 1rem;
+    max-width: none;
+    font-size: 1rem;
+  }
+
+  .blog-read-more {
+    color: #6366f1;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .blog-read-more:hover {
+    color: #4f46e5;
   }
 
   .testimonial-name {
@@ -596,6 +690,7 @@ const automationImage =
     .split-grid,
     .cards-grid.four-up,
     .cards-grid.two-up,
+    .cards-grid.three-up,
     .stats-grid,
     .company-data-grid {
       grid-template-columns: 1fr;

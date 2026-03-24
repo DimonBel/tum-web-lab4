@@ -70,6 +70,16 @@ const data = defineCollection({
 		}),
 });
 
+const blog = defineCollection({
+	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
+	schema: () =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+			image: z.string().optional(),
+		}),
+});
+
 export const collections = {
 	welcome,
 	statistics,
@@ -78,4 +88,5 @@ export const collections = {
 	choosingRocman,
 	feedback,
 	data,
+	blog,
 };
