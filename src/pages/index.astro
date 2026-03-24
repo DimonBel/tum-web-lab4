@@ -316,6 +316,26 @@ const automationImage =
       </section>
     </main>
     <Footer />
+
+    <div class="mascot" aria-label="ROCBot assistant">
+      <div class="mascot-tooltip">Hi! I'm ROCBot - your HR assistant! 🤖</div>
+      <div class="mascot-body">
+        <div class="mascot-head">
+          <div class="mascot-face">
+            <div class="mascot-eye left"></div>
+            <div class="mascot-eye right"></div>
+            <div class="mascot-mouth"></div>
+          </div>
+          <div class="mascot-antenna">
+            <div class="mascot-antenna-ball"></div>
+          </div>
+        </div>
+        <div class="mascot-torso"></div>
+        <div class="mascot-arm left"></div>
+        <div class="mascot-arm right"></div>
+      </div>
+      <div class="mascot-shadow"></div>
+    </div>
   </body>
 </html>
 
@@ -676,6 +696,279 @@ const automationImage =
     font-size: 0.98rem;
   }
 
+  .mascot {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    opacity: 0;
+    animation: mascotAppear 1s ease-out 2s forwards;
+  }
+
+  .mascot:hover {
+    transform: scale(1.15) translateY(-5px);
+  }
+
+  .mascot:hover .mascot-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mascot-body {
+    position: relative;
+    width: 70px;
+    height: 88px;
+  }
+
+  .mascot-head {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 35px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    border-radius: 12px 12px 9px 9px;
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.4);
+    animation: headBounce 2s ease-in-out infinite;
+  }
+
+  .mascot-antenna {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 12px;
+    background: linear-gradient(to top, #6366f1, #a5b4fc);
+    border-radius: 2px;
+  }
+
+  .mascot-antenna-ball {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: #f472b6;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(244, 114, 182, 0.6);
+    animation: antennaGlow 1.5s ease-in-out infinite;
+  }
+
+  .mascot-face {
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 22px;
+    background: #e0e7ff;
+    border-radius: 8px;
+  }
+
+  .mascot-eye {
+    position: absolute;
+    top: 5px;
+    width: 7px;
+    height: 7px;
+    background: #1e1b4b;
+    border-radius: 50%;
+    animation: blink 3s ease-in-out infinite;
+  }
+
+  .mascot-eye.left {
+    left: 6px;
+  }
+
+  .mascot-eye.right {
+    right: 6px;
+  }
+
+  .mascot-eye::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+  }
+
+  .mascot-mouth {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 6px;
+    background: #1e1b4b;
+    border-radius: 0 0 6px 6px;
+  }
+
+  .mascot-torso {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 42px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    border-radius: 10px 10px 12px 12px;
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.4);
+  }
+
+  .mascot-arm {
+    position: absolute;
+    top: 36px;
+    width: 12px;
+    height: 30px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+  }
+
+  .mascot-arm.left {
+    left: -3px;
+    transform: rotate(15deg);
+    animation: waveLeft 2s ease-in-out infinite;
+  }
+
+  .mascot-arm.right {
+    right: -3px;
+    transform: rotate(-15deg);
+    animation: waveRight 2s ease-in-out infinite;
+  }
+
+  .mascot-shadow {
+    position: absolute;
+    bottom: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 9px;
+    background: rgba(99, 102, 241, 0.2);
+    border-radius: 50%;
+    animation: shadowPulse 2s ease-in-out infinite;
+  }
+
+  .mascot-tooltip {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 15px;
+    background: #1e1b4b;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  .mascot-tooltip::before {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    right: 25px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #1e1b4b;
+  }
+
+  @keyframes headBounce {
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+      transform: translateX(-50%) translateY(-3px);
+    }
+  }
+
+  @keyframes antennaGlow {
+    0%,
+    100% {
+      box-shadow: 0 0 8px rgba(244, 114, 182, 0.6);
+    }
+
+    50% {
+      box-shadow: 0 0 15px rgba(244, 114, 182, 0.9);
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    45%,
+    55%,
+    100% {
+      transform: scaleY(1);
+    }
+
+    50% {
+      transform: scaleY(0.1);
+    }
+  }
+
+  @keyframes waveLeft {
+    0%,
+    100% {
+      transform: rotate(15deg);
+    }
+
+    50% {
+      transform: rotate(5deg);
+    }
+  }
+
+  @keyframes waveRight {
+    0%,
+    100% {
+      transform: rotate(-15deg);
+    }
+
+    50% {
+      transform: rotate(-5deg);
+    }
+  }
+
+  @keyframes shadowPulse {
+    0%,
+    100% {
+      transform: translateX(-50%) scale(1);
+      opacity: 0.2;
+    }
+
+    50% {
+      transform: translateX(-50%) scale(1.1);
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes mascotAppear {
+    0% {
+      opacity: 0;
+      transform: translateY(50px) scale(0.5);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
   .testimonial-name {
     margin-bottom: 0.2rem;
     color: #6366f1;
@@ -801,6 +1094,31 @@ const automationImage =
 
     .content-section {
       padding: 3.5rem 0;
+    }
+
+    .mascot {
+      bottom: 15px;
+      right: 15px;
+    }
+
+    .mascot-body {
+      width: 56px;
+      height: 70px;
+    }
+
+    .mascot-head {
+      width: 32px;
+      height: 28px;
+    }
+
+    .mascot-torso {
+      width: 38px;
+      height: 34px;
+    }
+
+    .mascot-arm {
+      width: 10px;
+      height: 24px;
     }
   }
 </style>
