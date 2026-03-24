@@ -19,15 +19,61 @@ collections:
       - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
 
-    # Skills Library Collection
-  - name: "skillsLibrary"
-    label: "Skills Library"
-    label_singular: "Skill"
-    description: "System skills library (icons, metadata, etc.)"
-    folder: "apps/portfolio/src/data/skills"
-    extension: "json"
+  - name: "welcomeMessage"
+    label: "Welcome Message"
+    description: "Welcome message for the application"
+    folder: "src/content/welcome"
+    create: true
+    fields: # The fields for each document, usually in frontmatter
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slogan", name: "slogan", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Image", name: "image", widget: "image", required: false }
+     
+  - name: "statistics"
+    label: "Statistics"
+    description: "Key statistics for the application"
+    folder: "src/content/statistics"
     create: true
     fields:
-      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Value", name: "value", widget: "string" }
+
+  - name: "recrutmentProcess"
+    label: "Recruitment Process"
+    description: "Steps in the recruitment process"
+    folder: "src/content/recruitmentProcess"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Image", name: "image", widget: "image", required: false }
+
+  - name: "automation"
+    label: "Automation"
+    description: "Automation features and benefits"
+    folder: "src/content/automation"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Image", name: "image", widget: "image", required: false }
+
+  - name: "choosingRocman"
+    label: "Choosing Rocman"
+    description: "Reasons to choose Rocman"
+    folder: "src/content/choosingRocman"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+
+  - name: "feedback"
+    label: "Feedback"
+    description: "User feedback and testimonials"
+    folder: "src/content/feedback"
+    create: true
+    fields:
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Icon", name: "icon", widget: "string", required: false }
+      - { label: "Tagline", name: "tagline", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
