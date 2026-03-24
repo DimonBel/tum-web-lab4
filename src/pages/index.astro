@@ -6,6 +6,12 @@ import { getCollection } from "astro:content";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 const welcomeEntries = await getCollection("welcome");
+const statisticsEntries = await getCollection("statistics");
+const recruitmentEntries = await getCollection("recruitmentProcess");
+const automationEntries = await getCollection("automation");
+const choosingEntries = await getCollection("choosingRocman");
+const feedbackEntries = await getCollection("feedback");
+
 const welcomeData = welcomeEntries[0]?.data;
 
 const heroTitle = welcomeData?.title ?? "The first HR-as-a-Service";
@@ -16,6 +22,132 @@ const heroDescription =
 const heroImage =
   welcomeData?.image?.src ??
   "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=800&fit=crop";
+
+const stats =
+  statisticsEntries.length > 0
+    ? statisticsEntries
+        .sort((a, b) => a.id.localeCompare(b.id))
+        .map((item) => item.data)
+    : [
+        { value: "+50%", title: "Better matches, pre-qualified candidates" },
+        { value: "70%", title: "Of recruitment tasks are automated" },
+        { value: "85%", title: "Recruitment costs reduction" },
+      ];
+
+const recruitmentItems =
+  recruitmentEntries.length > 0
+    ? recruitmentEntries
+        .sort((a, b) => a.id.localeCompare(b.id))
+        .map((item) => item.data)
+    : [
+        {
+          title: "Save Time",
+          description:
+            "Automation reduces time spent on repetitive tasks, allowing you to focus on what matters.",
+          image:
+            "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=200&h=200&fit=crop",
+        },
+        {
+          title: "Reduce Costs",
+          description:
+            "Eliminating the need for a HR department dedicated to in-house staff.",
+          image:
+            "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=200&h=200&fit=crop",
+        },
+        {
+          title: "Flexible & Customizable",
+          description:
+            "Process customization depending on the specifics of each business.",
+          image:
+            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop",
+        },
+        {
+          title: "Dedicated HR Expertise",
+          description:
+            "Receive recommendations and real support from your personal HR consultant.",
+          image:
+            "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200&h=200&fit=crop",
+        },
+      ];
+
+const automationItems =
+  automationEntries.length > 0
+    ? automationEntries
+        .sort((a, b) => a.id.localeCompare(b.id))
+        .map((item) => item.data)
+    : [
+        {
+          title: "One tool - the entire process, simple and efficient",
+          description:
+            "Automate the recruitment process - from candidate generation, intelligent screening and up to interview scheduling - in one comprehensive platform.",
+          image:
+            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=800&fit=crop",
+        },
+        {
+          title: "Subscription model",
+          description:
+            "For a fixed subscription, the Concierge service offers you pre-qualified, motivated, and interview-ready candidates.",
+        },
+        {
+          title: "Smart plus human",
+          description:
+            "We combine process automation, artificial intelligence and human support in a full HR-as-a-Service type service, specially designed for SMEs that want to hire efficiently.",
+        },
+      ];
+
+const choosingItems =
+  choosingEntries.length > 0
+    ? choosingEntries
+        .sort((a, b) => a.id.localeCompare(b.id))
+        .map((item) => item.data)
+    : [
+        {
+          title: "AI-Powered Screening",
+          description:
+            "Intelligent algorithms match candidates to your requirements automatically.",
+        },
+        {
+          title: "Pre-Qualified Candidates",
+          description:
+            "Access a pool of vetted candidates ready for your specific roles.",
+        },
+        {
+          title: "Dedicated Support",
+          description:
+            "Personal HR consultant to guide you through the process.",
+        },
+        {
+          title: "Cost Effective",
+          description:
+            "Fixed subscription model with no hidden fees or surprises.",
+        },
+      ];
+
+const feedbackItems =
+  feedbackEntries.length > 0
+    ? feedbackEntries
+        .sort((a, b) => a.id.localeCompare(b.id))
+        .map((item) => item.data)
+    : [
+        {
+          name: "Pearl Code",
+          tagline: "@Mila",
+          description:
+            "I want to thank the Rocman team for support in the recruitment process. Minimum resources and maximum results, highly recommend!",
+        },
+        {
+          name: "Zevet One SRL",
+          tagline: "@Dan",
+          description:
+            "Their professionalism and efficiency were essential for our recruitment success.",
+        },
+      ];
+
+const automationHeading = automationItems[0]?.title ?? "Automation";
+const automationParagraphs = automationItems.map((item) => item.description);
+const automationImage =
+  automationItems.find((item) => item.image)?.image ??
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=800&fit=crop";
 ---
 
 <!doctype html>
@@ -43,29 +175,126 @@ const heroImage =
         </div>
       </section>
 
-      <section
-        id="how-it-works"
-        class="placeholder"
-        aria-label="How It Works section placeholder"
-      >
+      <section class="stats-strip" aria-label="Key statistics">
+        <div class="container stats-grid">
+          {
+            stats.map((item) => (
+              <div class="stat-item">
+                <div class="stat-value">{item.value}</div>
+                <div class="stat-title">{item.title}</div>
+              </div>
+            ))
+          }
+        </div>
       </section>
-      <section
-        id="benefits"
-        class="placeholder"
-        aria-label="Benefits section placeholder"
-      >
+
+      <section id="how-it-works" class="content-section white">
+        <div class="container">
+          <div class="section-head">
+            <h2>Automate the recruitment process</h2>
+            <p>Transform the way you recruit with our platform</p>
+          </div>
+          <div class="cards-grid four-up">
+            {
+              recruitmentItems.map((item) => (
+                <article class="feature-card">
+                  <div class="feature-image-wrap">
+                    <img
+                      src={item.image?.src ?? item.image}
+                      alt={item.title}
+                      class="feature-image"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))
+            }
+          </div>
+        </div>
       </section>
-      <section
-        id="testimonials"
-        class="placeholder"
-        aria-label="Testimonials section placeholder"
-      >
+
+      <section class="content-section gradient-band">
+        <div class="container split-grid">
+          <div>
+            <h2>{automationHeading}</h2>
+            {automationParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+            <a href="#contact" class="button primary">
+              Discover how ROCMAN works for your business
+            </a>
+          </div>
+          <div class="hero-media">
+            <img
+              src={automationImage?.src ?? automationImage}
+              alt="Analytics Dashboard"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </section>
-      <section
-        id="contact"
-        class="placeholder"
-        aria-label="Contact section placeholder"
-      >
+
+      <section id="benefits" class="content-section white">
+        <div class="container">
+          <div class="section-head">
+            <h2>Why Choose ROCMAN?</h2>
+            <p>The smarter way to recruit for your business</p>
+          </div>
+          <div class="cards-grid two-up">
+            {
+              choosingItems.map((item, index) => (
+                <article class="benefit-card">
+                  <div class="benefit-index">
+                    {String(index + 1).padStart(2, "0")}
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" class="content-section light-bg">
+        <div class="container">
+          <div class="section-head">
+            <h2>What Our Clients Say</h2>
+            <p>Join the companies growing with us</p>
+          </div>
+          <div class="cards-grid two-up">
+            {
+              feedbackItems.map((item) => (
+                <article class="testimonial-card">
+                  <div class="testimonial-name">{item.name}</div>
+                  <div class="testimonial-tag">{item.tagline}</div>
+                  <p>"{item.description}"</p>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="content-section white">
+        <div class="container">
+          <div class="section-head">
+            <h2>Get Started Today</h2>
+            <p>Join our community to receive essential recruitment news</p>
+          </div>
+          <div class="contact-panel">
+            <h3>Contact Us</h3>
+            <p>
+              Ready to transform your recruitment process? Get in touch with our
+              team.
+            </p>
+            <ul>
+              <li><strong>Email:</strong> contact@rocman.org</li>
+              <li><strong>Phone:</strong> +373 68 352 111</li>
+              <li><strong>Location:</strong> Moldova</li>
+            </ul>
+          </div>
+        </div>
       </section>
     </main>
     <Footer />
@@ -90,6 +319,11 @@ const heroImage =
     max-width: 100%;
     margin: 0;
     padding: 0;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: min(1100px, calc(100% - 3rem));
   }
 
   .hero {
@@ -130,6 +364,206 @@ const heroImage =
     margin: 0 0 2rem;
     max-width: 530px;
     font-size: 1.08rem;
+    color: #4b5563;
+  }
+
+  .content-section {
+    padding: 4.5rem 0;
+  }
+
+  .content-section.white {
+    background: #fff;
+  }
+
+  .content-section.light-bg {
+    background: #f9fafb;
+  }
+
+  .gradient-band {
+    background: linear-gradient(135deg, #fdf4ff 0%, #ede9fe 50%, #e0e7ff 100%);
+  }
+
+  .stats-strip {
+    padding: 3rem 0;
+    background: #6366f1;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-value {
+    margin-bottom: 0.5rem;
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .stat-title {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+
+  .section-head {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .section-head h2 {
+    margin-bottom: 0.8rem;
+    color: #1e1b4b;
+  }
+
+  .section-head p {
+    margin: 0 auto;
+    max-width: 640px;
+  }
+
+  .cards-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .cards-grid.four-up {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cards-grid.two-up {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feature-card,
+  .benefit-card,
+  .testimonial-card {
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .feature-card:hover,
+  .benefit-card:hover,
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-card {
+    padding: 2rem;
+    text-align: center;
+    background: #f9fafb;
+  }
+
+  .feature-image-wrap {
+    margin-bottom: 1rem;
+  }
+
+  .feature-image {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 0.75rem;
+    object-fit: cover;
+  }
+
+  .feature-card h3,
+  .benefit-card h3 {
+    margin: 0 0 0.8rem;
+    color: #1e1b4b;
+    font-size: 1.35rem;
+  }
+
+  .feature-card p,
+  .benefit-card p,
+  .testimonial-card p {
+    margin: 0;
+    max-width: none;
+    font-size: 1rem;
+  }
+
+  .split-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 4.5rem;
+  }
+
+  .split-grid h2 {
+    color: #1e1b4b;
+  }
+
+  .split-grid p {
+    margin-bottom: 1rem;
+    max-width: none;
+  }
+
+  .benefit-card {
+    padding: 2rem;
+    border: 1px solid #e0e7ff;
+  }
+
+  .benefit-index {
+    margin-bottom: 0.9rem;
+    color: rgba(99, 102, 241, 0.2);
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+  }
+
+  .testimonial-card {
+    padding: 2rem;
+  }
+
+  .testimonial-name {
+    margin-bottom: 0.2rem;
+    color: #6366f1;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .testimonial-tag {
+    margin-bottom: 0.8rem;
+    color: #9ca3af;
+    font-style: italic;
+    font-size: 0.92rem;
+  }
+
+  .contact-panel {
+    margin: 0 auto;
+    max-width: 720px;
+    border-radius: 1rem;
+    border: 1px solid #e0e7ff;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .contact-panel h3 {
+    margin: 0 0 0.4rem;
+    color: #1e1b4b;
+    font-size: 1.6rem;
+  }
+
+  .contact-panel p {
+    margin: 0 0 1.2rem;
+    max-width: none;
+  }
+
+  .contact-panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
     color: #4b5563;
   }
 
@@ -190,19 +624,29 @@ const heroImage =
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
   }
 
-  .placeholder {
-    height: 1px;
-  }
-
   @media (max-width: 980px) {
+    .container {
+      width: min(1100px, calc(100% - 2rem));
+    }
+
     .hero-grid {
       grid-template-columns: 1fr;
       gap: 2.25rem;
-      width: min(1100px, calc(100% - 2rem));
     }
 
     .hero-media {
       order: -1;
+    }
+
+    .split-grid,
+    .cards-grid.four-up,
+    .cards-grid.two-up,
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .content-section {
+      padding: 3.5rem 0;
     }
   }
 </style>
