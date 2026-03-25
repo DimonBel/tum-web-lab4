@@ -52,36 +52,36 @@ const heroImage =
 
 const stats = statisticsEntries
   .sort((a, b) => a.id.localeCompare(b.id))
-  .map((item) => item.data);
+  .map((item) => ({ id: item.id, ...item.data }));
 
 const recruitmentItems = recruitmentEntries
   .sort((a, b) => a.id.localeCompare(b.id))
-  .map((item) => item.data);
+  .map((item) => ({ id: item.id, ...item.data }));
 
 const automationItems = automationEntries
   .sort((a, b) => a.id.localeCompare(b.id))
-  .map((item) => item.data);
+  .map((item) => ({ id: item.id, ...item.data }));
 
 const choosingItems = choosingEntries
   .sort((a, b) => a.id.localeCompare(b.id))
-  .map((item) => item.data);
+  .map((item) => ({ id: item.id, ...item.data }));
 
 const feedbackItems = feedbackEntries
   .sort((a, b) => a.id.localeCompare(b.id))
-  .map((item) => item.data);
+  .map((item) => ({ id: item.id, ...item.data }));
 
 const dataItems = dataEntries
   .sort((a, b) => a.id.localeCompare(b.id))
-  .map((item) => item.data);
+  .map((item) => ({ id: item.id, ...item.data }));
 
 const blogItems = blogEntries
   .filter((item) => item.data.draft === false)
   .sort((a, b) => a.id.localeCompare(b.id))
-  .map((item) => item.data);
+  .map((item) => ({ id: item.id, ...item.data }));
 
 const teamItems = teamEntries
   .sort((a, b) => a.id.localeCompare(b.id))
-  .map((item) => item.data);
+  .map((item) => ({ id: item.id, ...item.data }));
 
 const automationHeading = automationItems[0]?.title ?? "Automation";
 const automationParagraphs = automationItems.map((item) => item.description);
@@ -254,7 +254,7 @@ const automationImage =
                   </div>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
-                  <a href="#" class="blog-read-more">
+                  <a href={`/blog/${item.id}`} class="blog-read-more">
                     Read More -&gt;
                   </a>
                 </article>

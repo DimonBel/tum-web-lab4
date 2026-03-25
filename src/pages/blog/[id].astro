@@ -1,0 +1,175 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+
+const normalizeImageSrc = (src?: string) => {
+  if (!src) {
+    return undefined;
+  }
+
+  if (
+    src.startsWith("http://") ||
+    src.startsWith("https://") ||
+    src.startsWith("/")
+  ) {
+    return src;
+  }
+
+  if (src.startsWith("../../assets/images/")) {
+    return src.replace("../../assets/images/", "/assets/images/");
+  }
+
+  if (src.startsWith("assets/images/")) {
+    return `/${src}`;
+  }
+
+  return src;
+};
+
+const imageUrl = normalizeImageSrc(data.image) || "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=400&fit=crop";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`${data.title} | Blog`} description={data.description} />
+  </head>
+  <body class="blog-page">
+    <Header />
+    <main>
+      <article class="blog-post">
+        <div class="container">
+          <header class="blog-header">
+            <a href="/#blog" class="back-link">← Back to Blog</a>
+            <h1>{data.title}</h1>
+            {data.image && (
+              <div class="blog-image-wrap">
+                <img
+                  src={imageUrl}
+                  alt={data.title}
+                  class="blog-hero-image"
+                  loading="eager"
+                />
+              </div>
+            )}
+          </header>
+          <div class="blog-content">
+            <p class="blog-description">{data.description}</p>
+          </div>
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  :global(body.blog-page) {
+    font-family:
+      Inter,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+    line-height: 1.7;
+    color: #1e1b4b;
+    background: #fff;
+  }
+
+  main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: min(900px, calc(100% - 3rem));
+  }
+
+  .blog-post {
+    padding: 3rem 0 5rem;
+  }
+
+  .blog-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: #6366f1;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #4f46e5;
+  }
+
+  .blog-header h1 {
+    margin: 0 0 2rem;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #1e1b4b;
+  }
+
+  .blog-image-wrap {
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .blog-hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .blog-content {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .blog-description {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #4b5563;
+  }
+
+  @media (max-width: 768px) {
+    .blog-post {
+      padding: 2rem 0 4rem;
+    }
+
+    .blog-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .blog-description {
+      font-size: 1.05rem;
+    }
+  }
+</style>
