@@ -36,7 +36,7 @@ const automationEntries = await getCollection("automation");
 const choosingEntries = await getCollection("choosingRocman");
 const feedbackEntries = await getCollection("feedback");
 const dataEntries = await getCollection("data");
-const blogEntries = await getCollection("blog");
+const blogEntries = (await getCollection("blog")).filter(post => post.data.draft === false || post.data.draft === "false");
 const teamEntries = await getCollection("team");
 
 const welcomeData = welcomeEntries[0]?.data;
