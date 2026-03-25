@@ -75,6 +75,7 @@ const dataItems = dataEntries
   .map((item) => item.data);
 
 const blogItems = blogEntries
+  .filter((item) => item.data.draft === false)
   .sort((a, b) => a.id.localeCompare(b.id))
   .map((item) => item.data);
 
